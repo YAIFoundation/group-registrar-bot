@@ -1,0 +1,34 @@
+{
+    "name": "Group Registrar Bot",
+    "description": "A telegram bot to create lists in group.",
+    "repository": "https://github.com/YAIFoundation/group-registrar-bot",
+    "logo": "",
+    "keywords": [
+        "python",
+        "python-telegram-bot"
+    ],
+    "image": "heroku/python",
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "free"
+        }
+    },
+    "addons": [{
+        "plan": "heroku-postgresql"
+    }],
+    "env": {
+        "TOKEN": {
+            "description": "Bot API Key from BotFather https://t.me/BotFather",
+            "required": true
+        },
+        "WEBHOOK": {
+            "description": "Set to any value if you want to use Webhooks.",
+            "required": false
+        },
+        "URL": {
+            "description": "URL of server for webhooks. (Use `https://<appname>.herokuapp.com/`)",
+            "required": false
+        }
+    }
+}
