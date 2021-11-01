@@ -33,6 +33,7 @@ def inlinequeryhandler(update: Update, _: CallbackContext) -> None:
                     "text": query,
                     "in": [],
                     "out": [],
+                    "mode": "add",
                 },
             ),
         ],
@@ -43,6 +44,7 @@ def inlinequeryhandler(update: Update, _: CallbackContext) -> None:
                     "text": query,
                     "in": [],
                     "out": [],
+                    "mode": "exclude",
                 },
             ),
         ],
@@ -53,9 +55,9 @@ def inlinequeryhandler(update: Update, _: CallbackContext) -> None:
             title="Create New List",
             input_message_content=InputTextMessageContent(
                 message_text=escape_markdown(query),
-                reply_markup=InlineKeyboardMarkup(keyboard),
                 parse_mode=ParseMode.MARKDOWN,
             ),
+            reply_markup=InlineKeyboardMarkup(keyboard),
         )
     ]
     update.inline_query.answer(result)
@@ -69,13 +71,14 @@ def buttonhandler(update: Update, context: CallbackContext) -> None:
     )
     if not isinstance(user, User):
         return
-    in_list, out_list, response = in_or_out(data[3], user, data[1], data[2])
+    LOGGER.info(f"{user.id} pressed button with data: {data}")
+    in_list, out_list, response = in_or_out(data["mode"], user, data["in"], data["out"])
     context.bot.answer_callback_query(
         callback_query_id=update.callback_query.id,
         text=response,
         show_alert=False,
     )
-    msg = gen_message(data[0], in_list, out_list)
+    msg = gen_message(data["text"], in_list, out_list)
     update.callback_query.edit_message_text(
         text=msg["text"],
         reply_markup=msg["reply_markup"],

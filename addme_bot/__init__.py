@@ -25,6 +25,7 @@ PORT = int(environ.get("PORT", 5000))
 
 UPDATER: Updater = Updater(
     token=TOKEN,
+    arbitrary_callback_data=True,
     persistence=PostgresPersistence(url=DB_URI),
 )
 DISPATCHER: Dispatcher = UPDATER.dispatcher

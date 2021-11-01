@@ -28,7 +28,7 @@ def gen_message(
         )
         for i in out_list
     )
-    text = "\n\n".join((text, in_text, out_text))
+    text_output = "\n\n".join((text, in_text, out_text))
     keyboard = [
         [
             InlineKeyboardButton(
@@ -53,7 +53,7 @@ def gen_message(
             ),
         ],
     ]
-    return {"text": text, "reply_markup": InlineKeyboardMarkup(keyboard)}
+    return {"text": text_output, "reply_markup": InlineKeyboardMarkup(keyboard)}
 
 
 def in_or_out(
