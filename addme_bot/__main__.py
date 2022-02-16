@@ -57,6 +57,7 @@ def inlinequeryhandler(update: Update, _: CallbackContext) -> None:
                 message_text=escape_markdown(query),
                 parse_mode=ParseMode.MARKDOWN,
             ),
+            description=escape_markdown(query),
             reply_markup=InlineKeyboardMarkup(keyboard),
         )
     ]
