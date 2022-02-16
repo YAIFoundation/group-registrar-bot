@@ -72,7 +72,12 @@ def buttonhandler(update: Update, context: CallbackContext) -> None:
     if not isinstance(user, User):
         return
     LOGGER.info(f"{user.id} pressed button with data: {data}")
-    in_list, out_list, response = in_or_out(data["mode"], user, data["in"], data["out"])
+    in_list, out_list, response = in_or_out(
+        data["mode"],
+        user,
+        data["in"],
+        data["out"],
+    )
     context.bot.answer_callback_query(
         callback_query_id=update.callback_query.id,
         text=response,

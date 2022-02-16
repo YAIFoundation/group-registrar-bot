@@ -53,7 +53,10 @@ def gen_message(
             ),
         ],
     ]
-    return {"text": text_output, "reply_markup": InlineKeyboardMarkup(keyboard)}
+    return {
+        "text": text_output,
+        "reply_markup": InlineKeyboardMarkup(keyboard),
+    }
 
 
 def in_or_out(
@@ -76,9 +79,9 @@ def in_or_out(
             out_list.remove(usr)
         response = "Added you to the list!"
     elif mode == "exclude":
-        if user.id not in out_list:
+        if usr not in out_list:
             out_list.append(usr)
-        if user.id in in_list:
+        if usr in in_list:
             in_list.remove(usr)
         response = "Excluded you from the list!"
     return in_list, out_list, response
